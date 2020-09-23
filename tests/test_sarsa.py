@@ -1,9 +1,8 @@
 import unittest
 import numpy as np
 from collections import defaultdict
-#from sarsa import td_update, sarsa
+from sarsa import td_update, sarsa, make_epsilon_greedy_policy
 from env import FallEnv
-from solutions import td_update, sarsa, make_epsilon_greedy_policy
 
 class TestSARSA(unittest.TestCase):
 
