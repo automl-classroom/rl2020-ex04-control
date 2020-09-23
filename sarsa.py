@@ -1,5 +1,6 @@
 import gym
 import numpy as np
+from collections import defaultdict
 
 #Most of this code is Code provided by Fabio Ferreira & Andre Biedenkapp
 def sarsa(num_episodes: int,
@@ -29,11 +30,9 @@ def sarsa(num_episodes: int,
     train_steps_list = []
     num_performed_steps = 0
 
-    # Determine if we evaluate based on episodes or total timesteps
-    timesteps_total = np.iinfo(np.int32).max
     for i_episode in range(num_episodes + 1):
         # The policy we're following
-        policy = make_epsilon_greedy_policy(Q, epsilon, environment.action_space.n)
+        policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
         state = env.reset()
         done = False
         episode_length, cummulative_reward = 0, 0
@@ -45,11 +44,10 @@ def sarsa(num_episodes: int,
                                                        action_=action)
         rewards.append(cummulative_reward)
         lens.append(episode_length)
-        train_steps_list.append(environment.total_steps)
 
         print('Done %4d/%4d %s' % (i_episode, num_episodes, 'episodes'))
 
-    return (rewards, lens), (test_rewards, test_lens), (train_steps_list, test_steps_list)
+    return rewards, lens
 
 def make_epsilon_greedy_policy(Q: defaultdict, epsilon: float, nA: int) -> callable:
     """
@@ -70,7 +68,7 @@ def make_epsilon_greedy_policy(Q: defaultdict, epsilon: float, nA: int) -> calla
 
 
 def td_update(q: defaultdict, state: int, action: int, reward: float, next_state: int, gamma: float, alpha: float,
-              done: bool = False, action_: int):
+              done: bool, action_: int):
     """ Simple TD update rule """
 
     return
