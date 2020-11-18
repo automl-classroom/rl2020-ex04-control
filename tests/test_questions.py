@@ -2,7 +2,7 @@ import unittest
 
 class TestQuestions(unittest.TestCase):
 
-    def TestQuestions(self):
+    def testQuestions(self):
         with open('observations.txt') as fh:
             lines = fh.readlines()
 
