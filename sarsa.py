@@ -1,6 +1,7 @@
-import gym
 import numpy as np
 from collections import defaultdict
+
+from env import FallEnv
 
 #Most of this code is Code provided by Fabio Ferreira & Andre Biedenkapp
 def sarsa(num_episodes: int,
@@ -18,7 +19,7 @@ def sarsa(num_episodes: int,
     assert 0 <= discount_factor <= 1, 'Lambda should be in [0, 1]'
     assert 0 <= epsilon <= 1, 'epsilon has to be in [0, 1]'
     assert alpha > 0, 'Learning rate has to be positive'
-    env = gym.make('CartPole-v1')
+    env = FallEnv()
     # The action-value function.
     # Nested dict that maps state -> (action -> action-value).
     Q = defaultdict(lambda: np.zeros(env.action_space.n))
@@ -45,7 +46,7 @@ def sarsa(num_episodes: int,
         rewards.append(cummulative_reward)
         lens.append(episode_length)
 
-        print('Done %4d/%4d %s' % (i_episode, num_episodes, 'episodes'))
+        print(f'Done {i_episode:4d}/{num_episodes:4d} episodes')
 
     return rewards, lens
 
