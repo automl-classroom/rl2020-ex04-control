@@ -61,6 +61,7 @@ def make_epsilon_greedy_policy(Q: defaultdict, epsilon: float, nA: int) -> calla
 
 
     def policy_fn(observation):
+        """ Returns an probability distribution for each action depending on an observation """
         policy = np.ones(nA) * epsilon / nA
         return policy
 
